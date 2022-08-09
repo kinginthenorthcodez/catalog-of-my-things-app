@@ -5,8 +5,6 @@ class Book < Item
     super(publish_date, id)
     @publisher = publisher
     @cover_state = cover_state
-    @publish_date = publish_date
-    @id = id
   end
 
   def can_be_archived?()
