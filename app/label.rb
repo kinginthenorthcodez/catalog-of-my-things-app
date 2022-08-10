@@ -1,7 +1,9 @@
 require_relative './item'
 
 class Label
-  attr_reader :color, :title, :items
+
+  attr_accessor :color, :title
+  attr_reader :items
 
   def initialize(color, title)
     @color = color
