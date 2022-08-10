@@ -13,4 +13,3 @@ class Book < Item
     false
   end
 end
-
