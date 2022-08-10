@@ -4,7 +4,6 @@ class Item
   @bol = false
   # rubocop:disable Metrics/ParameterLists
   def initialize(publish_date, author = nil, label = nil, genre = nil, source = nil, archived = @bol)
-
     @id = Random.rand(1..1000)
     @publish_date = publish_date
     @archived = archived
