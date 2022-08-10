@@ -1,5 +1,5 @@
 class Item
-  attr_accessor :source, :label, :genre, :author
+  attr_accessor :source, :lable, :genre, :author, :id, :publish_date
 
   @bol = true
 
