@@ -10,6 +10,7 @@ Create TABLE book (
   publisher Varchar(250),
   cover_state Varchar(50),
   publish_date Date,
+  archived Boolean,
   CONSTRAINT fk_author FOREIGN KEY (author_id) REFERENCES author(id),
   CONSTRAINT fk_label FOREIGN KEY (label_id) REFERENCES label(id),
   CONSTRAINT fk_genre FOREIGN KEY (genre_id) REFERENCES genre(id),
