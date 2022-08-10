@@ -2,7 +2,7 @@ require_relative '../app/book'
 
 describe Book do
   before(:all) do
-    @book = Book.new('publisher1', 'bad',  13 / 11 / 2021)
+    @book = Book.new('publisher1', 'bad', 13 / 11 / 2021)
   end
   it 'the constructor starts correctly' do
     expect(@book.publisher).to eq 'publisher1'
