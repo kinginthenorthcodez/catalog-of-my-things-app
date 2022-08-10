@@ -1,4 +1,4 @@
-require '../app/book'
+require_relative '../app/book.rb'
 
 describe Book do
   before(:all) do
