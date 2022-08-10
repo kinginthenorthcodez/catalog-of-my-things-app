@@ -9,7 +9,7 @@ describe Label do
     expect(@label.color).to eq 'black'
   end
   it 'add_item method works fine' do
-    @book = Book.new('publisher1', 'bad', 12 / 12 / 2020)
+    @book = Book.new('publisher1', 'bad', 12 / 10 / 2020)
     @label.add_item(@book)
     expect(@label.items.length).to eq 1
     expect(@book.label).to eq @label
