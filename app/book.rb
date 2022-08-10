@@ -8,6 +8,7 @@ class Book < Item
     super(publish_date, author, label, genre, source)
     @publisher = publisher
     @cover_state = cover_state
+    @publish_date = publish_date
   end
 
   # rubocop:enable Metrics/ParameterLists
