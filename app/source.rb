@@ -1,7 +1,8 @@
 class Source
-  attr_accessors :name
+  attr_accessor :name
+
   def initialize(name)
-    @id = Random.new(0...1000)
+    @id = Random.rand(0...1000)
     @items = []
     @name = name
   end
