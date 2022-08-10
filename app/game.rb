@@ -2,7 +2,7 @@ require_relative './item'
 
 class Game < Item
   attr_accessor :multplayer, :last_played_at
-  
+
   def initialize(multplayer, last_played_at, publish_date, archived)
     super(publish_date, archived)
     @multplayer = multplayer
@@ -13,6 +13,7 @@ class Game < Item
 
   def can_be_archived?
     return true if super && @last_played_at > 2
+
     false
   end
 end
