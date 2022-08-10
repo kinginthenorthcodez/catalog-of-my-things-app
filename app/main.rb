@@ -1,4 +1,7 @@
 require_relative './book_methods'
+require_relative './movie'
+require_relative '../file/read_write'
+require_relative './source'
 
 class Main
   def initialize(options)
@@ -14,6 +17,20 @@ class Main
     gets.chomp.to_i
   end
 
+  def prompt_create_movie
+    puts('Enter date of publication (YYYY-MM-DD):')
+    publish_date = gets.chomp.to_s
+    puts('Is the Movie is silent Y/N:')
+    silent = gets.chomp.to_s.downcase == 'y'
+    puts('Enter Source Name:')
+    source_name = gets.chomp.to_s
+    Movie.new(silent, publish_date, false)
+    Source.new(source_name)
+    ReadWrite.new(Movie).add_file({ silent: silent, publish_date: publish_date, archived: false })
+    ReadWrite.new(Source).add_file({ name: source_name, items: [] })
+    puts('Movie successfully added')
+  end
+
   def promot_user # rubocop:disable Metrics/CyclomaticComplexity
     @books = BookApp.new
     loop do
@@ -21,21 +38,33 @@ class Main
       input = user_input
       case input
       when 1 then @books.list_all_books
-      when 2 then p 'list all movie'
+      when 2 then list_all(Movie)
       when 3 then p 'list all games'
       when 4 then p 'List all generes'
       when 5 then p 'List all labels'
       when 6 then p 'List all authors'
-      when 7 then p 'List all sources'
       when 8 then @books.create_book
+      when 7 then list_all(Source)
       when 9 then p 'List all sourcesasdf'
-      when 10 then p 'List all asdf'
+      when 10 then prompt_create_movie
       else
         break
       end
       break unless input.positive? && input < 11
     end
   end
+
+  def list_all(type)
+    data = ReadWrite.new(type).read_all_records
+    if data.empty?
+      puts("No #{type} found. \n")
+    else
+      puts("List of #{type} albums: \n")
+      puts(data)
+    end
+  end
+
+  def create_movie; end
 end
 
 Main.new([
