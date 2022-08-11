@@ -4,6 +4,30 @@ DROP TABLE IF EXISTS source;
 
 DROP TABLE IF EXISTS movie;
 
+DROP TABLE IF EXISTS item;
+
+DROP TABLE IF EXISTS author;
+
+DROP TABLE IF EXISTS game;
+
+
+CREATE TABLE item(
+  id INT NOT NULL Generated Always As Identity,
+  genre_id INT,
+  source_id INT,
+  label_id INT,
+  author_id INT,
+  publish_date Date,
+  archived Boolean,
+
+  CONSTRAINT fk_genre FOREIGN KEY(genre_id) REFERENCES genre(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_source FOREIGN KEY(source_id) REFERENCES source(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_label FOREIGN KEY(label_id) REFERENCES label(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_author FOREIGN KEY(author_id) REFERENCES author(id) ON DELETE SET NULL ON UPDATE CASCADE,
+
+  PRIMARY KEY(id)
+);
+
 CREATE TABLE movie(
   id INT NOT NULL Generated Always As Identity,
   silent Boolean,
@@ -49,3 +73,22 @@ Create TABLE book (
   CONSTRAINT fk_source FOREIGN KEY (source_id) REFERENCES source(id),
   PRIMARY KEY (id)
 )
+
+CREATE TABLE author(
+  id INT NOT NULL Generated Always As Identity,
+  first_name varchar(50),
+  last_name varchar(50),
+  items TEXT [],
+
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE game(
+  id INT NOT NULL Generated Always As Identity,
+  multiplayer Boolean,
+  last_played_at varchar(50),
+  item_id INT,
+
+  CONSTRAINT fk_item FOREIGN KEY (item_id) REFERENCES item(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  PRIMARY KEY(id)
+);
