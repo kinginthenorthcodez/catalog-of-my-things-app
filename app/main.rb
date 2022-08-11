@@ -32,7 +32,9 @@ class Main
     puts('Movie successfully added')
   end
 
-  def promot_user # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/CyclomaticComplexity
+  def promot_user
     @books = BookApp.new
     @labels = LabelApp.new
     loop do
@@ -56,7 +58,9 @@ class Main
       break unless input.positive? && input < 13
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
+  # rubocop:enable Metrics/CyclomaticComplexity
   def list_all(type)
     data = ReadWrite.new(type).read_all_records
     if data.empty?
