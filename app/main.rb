@@ -82,7 +82,7 @@ class Main
       when 3 then list_games
       when 4 then p 'List all generes'
       when 5 then p 'List all labels'
-      when 6 then  list_author
+      when 6 then list_author
       when 7 then list_all(Source)
       when 8 then promot_create_book
       when 9 then p 'List all sourcesasdf'
