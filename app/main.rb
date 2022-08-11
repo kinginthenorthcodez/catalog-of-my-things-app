@@ -38,6 +38,7 @@ class Main
     @books = BookApp.new
     @books.read_books
     @labels = LabelApp.new
+    @labels.read_labels
     loop do
       print_menu
       input = user_input
@@ -55,6 +56,7 @@ class Main
       when 12 then @labels.create_label
       else
         @books.save_books
+        @labels.save_labels
         break
       end
       break unless input.positive? && input < 13

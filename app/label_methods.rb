@@ -25,6 +25,25 @@ class LabelApp
       puts " the label title: #{item.title}
       the label color: #{item.color}
       the label items: #{item.items}"
+      puts
     end
   end
+
+  def save_labels
+  labels = []
+  @labels.each do |item|
+    label = { color: item.color, title: item.title}
+    labels.push(label)
+  end
+  File.write('labels.json', JSON.generate(labels))
+end
+
+def read_labels
+  File.write('labels.json', JSON.generate([])) unless File.exist?('labels.json')
+
+  labels = JSON.parse(File.read('labels.json'))
+  labels.each do |item|
+    label = add_label(item['color'], item['title'])
+  end
+end
 end
