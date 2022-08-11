@@ -48,7 +48,7 @@ class Main
     option
   end
 
-   # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/CyclomaticComplexity
   def promot_user
     @books = BookApp.new
