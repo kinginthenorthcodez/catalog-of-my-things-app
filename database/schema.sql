@@ -87,8 +87,16 @@ CREATE TABLE game(
   id INT NOT NULL Generated Always As Identity,
   multiplayer Boolean,
   last_played_at varchar(50),
-  item_id INT,
-
-  CONSTRAINT fk_item FOREIGN KEY (item_id) REFERENCES item(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  genre_id INT,
+  source_id INT,
+  label_id INT,
+  author_id INT,
+  publish_date Date,
+  archived Boolean,
+  
+  CONSTRAINT fk_genre FOREIGN KEY(genre_id) REFERENCES genre(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_source FOREIGN KEY(source_id) REFERENCES source(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_label FOREIGN KEY(label_id) REFERENCES label(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_author FOREIGN KEY(author_id) REFERENCES author(id) ON DELETE SET NULL ON UPDATE CASCADE,
   PRIMARY KEY(id)
 );
