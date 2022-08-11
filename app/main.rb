@@ -36,6 +36,7 @@ class Main
   # rubocop:disable Metrics/CyclomaticComplexity
   def promot_user
     @books = BookApp.new
+    @books.read_books
     @labels = LabelApp.new
     loop do
       print_menu
@@ -53,6 +54,7 @@ class Main
       when 10 then prompt_create_movie
       when 12 then @labels.create_label
       else
+        @books.save_books
         break
       end
       break unless input.positive? && input < 13
