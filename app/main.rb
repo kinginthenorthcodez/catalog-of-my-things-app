@@ -2,6 +2,7 @@ require_relative './book_methods'
 require_relative './movie'
 require_relative '../file/read_write'
 require_relative './source'
+require_relative './label_methods'
 
 class Main
   def initialize(options)
@@ -33,6 +34,7 @@ class Main
 
   def promot_user # rubocop:disable Metrics/CyclomaticComplexity
     @books = BookApp.new
+    @labels = LabelApp.new
     loop do
       print_menu
       input = user_input
@@ -41,16 +43,17 @@ class Main
       when 2 then list_all(Movie)
       when 3 then p 'list all games'
       when 4 then p 'List all generes'
-      when 5 then p 'List all labels'
+      when 5 then @labels.list_all_labels
       when 6 then p 'List all authors'
       when 8 then @books.create_book
       when 7 then list_all(Source)
       when 9 then p 'List all sourcesasdf'
       when 10 then prompt_create_movie
+      when 12 then @labels.create_label
       else
         break
       end
-      break unless input.positive? && input < 11
+      break unless input.positive? && input < 13
     end
   end
 
@@ -79,5 +82,6 @@ Main.new([
            { order: 9, message: 'Add a music album' },
            { order: 10, message: 'Add a movie' },
            { order: 11, message: 'Add a game' },
+           { order: 12, message: 'Add a label' },
            { order: 'Q', message: 'Exit the app' }
          ]).promot_user
