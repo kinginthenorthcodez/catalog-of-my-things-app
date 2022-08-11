@@ -1,7 +1,13 @@
+require './author_list'
+require './game_list'
+
 class Main
   def initialize(options)
     @options = options
   end
+
+  include AuthorList
+  include GameList
 
   def print_menu
     puts "\n Welcome to Catelogy of my things APP"
@@ -38,6 +44,17 @@ class Main
     # Book.new()
   end
 
+  def parse_bool
+    option = gets.chomp
+    case option.to_s.upcase
+    when 'Y'
+      option = true
+    when 'N'
+      option = false
+    end
+    option
+  end
+
   def promot_user # rubocop:disable Metrics/CyclomaticComplexity
     loop do
       print_menu
@@ -45,14 +62,15 @@ class Main
       case input
       when 1 then p 'list all books'
       when 2 then p 'list all movie'
-      when 3 then p 'list all games'
+      when 3 then list_games
       when 4 then p 'List all generes'
       when 5 then p 'List all labels'
-      when 6 then p 'List all authors'
+      when 6 then p list_author
       when 7 then p 'List all sources'
       when 8 then promot_create_book
-      when 9 then p 'List all sourcesasdf'
-      when 10 then p 'List all asdf'
+      when 9 then p 'Add a music album'
+      when 10 then p 'Add a movie'
+      when 11 then add_game
       else
         break
       end
