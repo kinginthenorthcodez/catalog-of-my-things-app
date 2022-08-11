@@ -1,8 +1,10 @@
+require_relative './book_methods'
 require './author_list'
 require './game_list'
 require_relative './movie'
 require_relative '../file/read_write'
 require_relative './source'
+require_relative './label_methods'
 
 class Main
   def initialize(options)
@@ -35,32 +37,6 @@ class Main
     puts('Movie successfully added')
   end
 
-  def promot_create_book
-    puts 'Input Publisher'
-    publisher = user_input
-    puts 'Input cover state'
-    cover_state = user_input
-
-    authors = [{
-      id: 1,
-      first_name: 'Isaac',
-      last_name: 'Maqueen',
-      items: [1, 2, 3]
-    }, {
-      id: 2,
-      first_name: 'Bassem',
-      last_name: 'Shams',
-      items: [1, 2, 3]
-    }]
-
-    authors.each { |author| puts "#{author[:id]} #{author[:first_name]}  #{author[:last_name]}" }
-    puts 'Select Author from the list '
-    author_index = user_input
-
-    [publisher, cover_state, author_index]
-    # Book.new()
-  end
-
   def parse_bool
     option = gets.chomp
     case option.to_s.upcase
@@ -72,29 +48,40 @@ class Main
     option
   end
 
-  def promot_user # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/CyclomaticComplexity
+  def promot_user
+    @books = BookApp.new
+    @books.read_books
+    @labels = LabelApp.new
+    @labels.read_labels
     loop do
       print_menu
       input = user_input
       case input
-      when 1 then p 'list all books'
+      when 1 then @books.list_all_books
       when 2 then list_all(Movie)
       when 3 then list_games
       when 4 then p 'List all generes'
-      when 5 then p 'List all labels'
+      when 5 then @labels.list_all_labels
       when 6 then list_author
+      when 8 then @books.create_book
       when 7 then list_all(Source)
-      when 8 then promot_create_book
       when 9 then p 'List all sourcesasdf'
       when 10 then prompt_create_movie
+      when 12 then @labels.create_label
       when 11 then add_game
       else
+        @books.save_books
+        @labels.save_labels
         break
       end
-      break unless input.positive? && input < 11
+      break unless input.positive? && input < 13
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
+  # rubocop:enable Metrics/CyclomaticComplexity
   def list_all(type)
     data = ReadWrite.new(type).read_all_records
     if data.empty?
@@ -120,5 +107,6 @@ Main.new([
            { order: 9, message: 'Add a music album' },
            { order: 10, message: 'Add a movie' },
            { order: 11, message: 'Add a game' },
+           { order: 12, message: 'Add a label' },
            { order: 'Q', message: 'Exit the app' }
          ]).promot_user

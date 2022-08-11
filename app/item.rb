@@ -1,5 +1,6 @@
 class Item
   attr_accessor :source, :label, :genre, :author, :publish_date
+  attr_reader :id
 
   @bol = false
   def initialize(publish_date, archived = @bol)
