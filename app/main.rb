@@ -1,10 +1,11 @@
 require_relative './book_methods'
-require './author_list'
-require './game_list'
+require_relative './author_list'
+require_relative './game_list'
 require_relative './movie'
 require_relative '../file/read_write'
 require_relative './source'
 require_relative './label_methods'
+require_relative './music_album'
 
 class Main
   def initialize(options)
@@ -67,7 +68,7 @@ class Main
       when 6 then list_author
       when 8 then @books.create_book
       when 7 then list_all(Source)
-      when 9 then p 'List all sourcesasdf'
+      when 9 then create_music_album
       when 10 then prompt_create_movie
       when 12 then @labels.create_label
       when 11 then add_game
