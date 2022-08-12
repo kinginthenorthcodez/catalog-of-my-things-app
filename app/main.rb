@@ -96,13 +96,13 @@ class Main
   end
 
   def format_data(data)
-    data.each do |item| 
+    data.each do |item|
       if item["type"] == "MusicAlbum"
-          display_list(item)
-       # when data.type == 'Movie' 
+        display_list(item)
+      # when data.type == 'Movie'
       elsif item["type"] == "Genre"
         display_genre(item)
-        #implement method to display formatted movie list
+        # implement method to display formatted movie list
       end
     end
   end
@@ -112,7 +112,7 @@ end
 
 Main.new([
            { order: 1, message: 'List all books' },
-           {order: 2, message: 'List all music albums'},
+           { order: 2, message: 'List all music albums' },
            { order: 3, message: 'List all movies' },
            { order: 4, message: 'List of games' },
            { order: 5, message: "List all genres (e.g 'Comedy', 'Thriller')'" },
