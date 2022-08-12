@@ -32,7 +32,6 @@ module GameList
     File.write('./app/game.json', JSON.generate([])) unless File.exist?('./app/game.json')
     type_list = JSON.parse(File.read('./app/game.json')).push(game_object)
     File.write('./app/game.json', type_list.to_json)
-
   end
 
   def list_games
