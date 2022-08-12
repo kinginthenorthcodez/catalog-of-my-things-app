@@ -28,18 +28,18 @@ module GameList
 
   def save_to_file(player, date, publish_date, archived)
     game_object = { multplayer: player, last_played: date, publish_date: publish_date, archived: archived }
-    data = File.read('game.json') if File.exist?('game.json')
-    file_data = JSON.parse(data)
-    file_data << game_object
-    File.write('game.json', JSON.generate(file_data))
+
+    File.write('./app/game.json', JSON.generate([])) unless File.exist?('./app/game.json')
+    type_list = JSON.parse(File.read('./app/game.json')).push(game_object)
+    File.write('./app/game.json', type_list.to_json)
   end
 
   def list_games
-    p ' Game list'
-    data = File.read('game.json') if File.exist?('game.json')
-    games = JSON.parse(data)
+    File.write('./app/game.json', JSON.generate([])) unless File.exist?('./app/game.json')
+    data = JSON.parse(File.read('./app/game.json'))
+
     puts '| Index | Multplayer | Last Played | Published | Archived |'
-    games.each_with_index do |game, index|
+    data.each_with_index do |game, index|
       puts "#{[index + 1]} #{game['multplayer']} #{game['last_played']}yrs #{game['publish_date']}} #{game['archived']}"
     end
   end

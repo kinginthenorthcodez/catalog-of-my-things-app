@@ -33,8 +33,8 @@ end
 
 # rubocop:enable Metrics/MethodLength
 def display_list(data)
-  puts "1. on_spotify: #{data['on_spotify']}\n2. published date: #{data['published_date']}\n
-  3. archived: #{data['archived']}\n4. genre: #{data['genre']}"
+  puts "on_spotify: #{data['on_spotify']}\n published date: #{data['published_date']}\n archived: #{data['archived']}
+  \ngenre: #{data['genre']}"
 end
 
 def display_genre(data)
