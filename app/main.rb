@@ -97,10 +97,11 @@ class Main
 
   def format_data(data)
     data.each do |item|
-      if item["type"] == "MusicAlbum"
+      case item['type']
+      when 'MusicAlbum'
         display_list(item)
       # when data.type == 'Movie'
-      elsif item["type"] == "Genre"
+      when 'Genre'
         display_genre(item)
         # implement method to display formatted movie list
       end

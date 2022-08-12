@@ -2,8 +2,9 @@ require_relative '../file/read_write'
 require_relative './music'
 require_relative './genre'
 
+# rubocop:disable Metrics/MethodLength
 def create_music_album
-  puts "Is album on spotify? Y or N"
+  puts 'Is album on spotify? Y or N'
   on_spotify = parse_bool
   puts 'Enter published date'
   published_date = gets.chomp
@@ -13,7 +14,7 @@ def create_music_album
   genre_name = gets.chomp
 
   music = MusicAlbum.new(on_spotify, published_date, archived)
-  read_write = ReadWrite.new(MusicAlbum)
+  ReadWrite.new(MusicAlbum)
     .add_file({
                 type: music.class.to_s,
                 on_spotify: on_spotify,
@@ -23,16 +24,17 @@ def create_music_album
               })
 
   genre = Genre.new(genre_name)
-  read_write = ReadWrite.new(Genre)
+  ReadWrite.new(Genre)
     .add_file({
                 type: genre.class.to_s,
                 name: genre_name
               })
 end
 
+# rubocop:enable Metrics/MethodLength
 def display_list(data)
-  puts "1. on_spotify: #{data['on_spotify']}\n2. published date: #{data['published_date']}\n3. archived: #{data['archived']}\n4. genre: #{data['genre']}"
-  puts "***********"
+  puts "1. on_spotify: #{data['on_spotify']}\n2. published date: #{data['published_date']}\n
+  3. archived: #{data['archived']}\n4. genre: #{data['genre']}"
 end
 
 def display_genre(data)
