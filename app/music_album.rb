@@ -12,13 +12,14 @@ def create_music_album
    music = MusicAlbum.new(on_spotify, published_date, archived)
    read_write = ReadWrite.new(MusicAlbum)
           .add_file({
+            type: music.class.to_s,
             on_spotify: on_spotify, 
             published_date: published_date,
-            archived: archived
+            archived: archived,
           })     
 end
 
 
-def list_music_albums
-   
+def display_list(data)
+  puts "1. on_spotify: #{data['on_spotify']}\n2. published date: #{data['published_date']}\n3. archived: #{data['archived']}\n"
 end
