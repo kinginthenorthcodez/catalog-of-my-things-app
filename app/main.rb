@@ -95,17 +95,16 @@ class Main
     end
   end
 
- #{ type: Movie.class.to_s, silent: silent, publish_date: publish_date, archived: false }
+  # { type: Movie.class.to_s, silent: silent, publish_date: publish_date, archived: false }
 
   def display_movie(item)
-      puts "published data: #{item['publish_date']}\nsilent: #{item['silent']}\narchived: #{item['archived']}"
-      puts " "
+    puts "published data: #{item['publish_date']}\nsilent: #{item['silent']}\narchived: #{item['archived']}"
+    puts ' '
   end
 
   def display_source(item)
     puts "name: #{item['name']}\nitems: #{item['items']}"
   end
-
 
   def format_data(data)
     data.each do |item|
@@ -122,7 +121,6 @@ class Main
       when 'Source'
         display_source(item)
       end
-
     end
   end
 
