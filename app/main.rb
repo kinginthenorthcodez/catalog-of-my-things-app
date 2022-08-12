@@ -6,6 +6,7 @@ require_relative '../file/read_write'
 require_relative './source'
 require_relative './label_methods'
 require_relative './music_album'
+require_relative './genre'
 
 class Main
   def initialize(options)
@@ -64,7 +65,7 @@ class Main
       when 2 then list_all(MusicAlbum)
       when 3 then list_all(Movie)
       when 4 then list_games
-      when 5 then p 'List all generes'
+      when 5 then list_all(Genre)
       when 6 then @labels.list_all_labels
       when 7 then list_author
       when 8 then @books.create_book
@@ -89,7 +90,7 @@ class Main
     if data.empty?
       puts("No #{type} found. \n")
     else
-      puts("List of #{type} albums: \n")
+      puts("List of #{type}: \n")
       format_data(data)
     end
   end
@@ -99,7 +100,8 @@ class Main
       if item["type"] == "MusicAlbum"
           display_list(item)
        # when data.type == 'Movie' 
-      elsif item["type"] == "Movie"
+      elsif item["type"] == "Genre"
+        display_genre(item)
         #implement method to display formatted movie list
       end
     end
@@ -110,7 +112,7 @@ end
 
 Main.new([
            { order: 1, message: 'List all books' },
-          {order: 2, message: 'List all music albums'},
+           {order: 2, message: 'List all music albums'},
            { order: 3, message: 'List all movies' },
            { order: 4, message: 'List of games' },
            { order: 5, message: "List all genres (e.g 'Comedy', 'Thriller')'" },
