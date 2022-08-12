@@ -32,10 +32,10 @@ class Main
     silent = gets.chomp.to_s.downcase == 'y'
     puts('Enter Source Name:')
     source_name = gets.chomp.to_s
-    Movie.new(silent, publish_date, false)
-    Source.new(source_name)
-    ReadWrite.new(Movie).add_file({ silent: silent, publish_date: publish_date, archived: false })
-    ReadWrite.new(Source).add_file({ name: source_name, items: [] })
+    movie = Movie.new(silent, publish_date, false)
+    source = Source.new(source_name)
+    ReadWrite.new(Movie).add_file({ type: movie.class, silent: silent, publish_date: publish_date, archived: false })
+    ReadWrite.new(Source).add_file({ type: source.class, name: source_name, items: [] })
     puts('Movie successfully added')
   end
 
@@ -95,6 +95,18 @@ class Main
     end
   end
 
+ #{ type: Movie.class.to_s, silent: silent, publish_date: publish_date, archived: false }
+
+  def display_movie(item)
+      puts "published data: #{item['publish_date']}\nsilent: #{item['silent']}\narchived: #{item['archived']}"
+      puts " "
+  end
+
+  def display_source(item)
+    puts "name: #{item['name']}\nitems: #{item['items']}"
+  end
+
+
   def format_data(data)
     data.each do |item|
       case item['type']
@@ -104,7 +116,13 @@ class Main
       when 'Genre'
         display_genre(item)
         # implement method to display formatted movie list
+      when 'Movie'
+        display_movie(item)
+
+      when 'Source'
+        display_source(item)
       end
+
     end
   end
 
@@ -119,11 +137,11 @@ Main.new([
            { order: 5, message: "List all genres (e.g 'Comedy', 'Thriller')'" },
            { order: 6, message: "List all labels (e.g. 'Gift', 'New')" },
            { order: 7, message: "List all authors (e.g. 'Stephen King')" },
-           { order: 8, message: "List all sources (e.g. 'From a friend', 'Online shop')" },
-           { order: 9, message: 'Add a book' },
+           { order: 8, message: 'Add a book' },
+           { order: 9, message: "List all sources (e.g. 'From a friend', 'Online shop')" },
            { order: 10, message: 'Add a music album' },
            { order: 11, message: 'Add a movie' },
-           { order: 12, message: 'Add a game' },
-           { order: 13, message: 'Add a label' },
+           { order: 12, message: 'Add a label' },
+           { order: 13, message: 'Add a game' },
            { order: 'Q', message: 'Exit the app' }
          ]).promot_user
