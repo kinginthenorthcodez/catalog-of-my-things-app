@@ -1,4 +1,4 @@
-require './author'
+require_relative './author'
 require 'json'
 require 'fileutils'
 

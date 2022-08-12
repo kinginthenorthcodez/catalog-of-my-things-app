@@ -1,5 +1,5 @@
-require './game'
-require './author'
+require_relative './game'
+require_relative './author'
 require 'json'
 require 'fileutils'
 

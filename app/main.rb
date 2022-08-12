@@ -1,10 +1,12 @@
 require_relative './book_methods'
-require './author_list'
-require './game_list'
+require_relative './author_list'
+require_relative './game_list'
 require_relative './movie'
 require_relative '../file/read_write'
 require_relative './source'
 require_relative './label_methods'
+require_relative './music_album'
+require_relative './genre'
 
 class Main
   def initialize(options)
@@ -60,23 +62,24 @@ class Main
       input = user_input
       case input
       when 1 then @books.list_all_books
-      when 2 then list_all(Movie)
-      when 3 then list_games
-      when 4 then p 'List all generes'
-      when 5 then @labels.list_all_labels
-      when 6 then list_author
+      when 2 then list_all(MusicAlbum)
+      when 3 then list_all(Movie)
+      when 4 then list_games
+      when 5 then list_all(Genre)
+      when 6 then @labels.list_all_labels
+      when 7 then list_author
       when 8 then @books.create_book
-      when 7 then list_all(Source)
-      when 9 then p 'List all sourcesasdf'
-      when 10 then prompt_create_movie
+      when 9 then list_all(Source)
+      when 10 then create_music_album
+      when 11 then prompt_create_movie
       when 12 then @labels.create_label
-      when 11 then add_game
+      when 13 then add_game
       else
         @books.save_books
         @labels.save_labels
         break
       end
-      break unless input.positive? && input < 13
+      break unless input.positive? && input <= 13
     end
   end
   # rubocop:enable Metrics/MethodLength
@@ -87,8 +90,21 @@ class Main
     if data.empty?
       puts("No #{type} found. \n")
     else
-      puts("List of #{type} albums: \n")
-      puts(data)
+      puts("List of #{type}: \n")
+      format_data(data)
+    end
+  end
+
+  def format_data(data)
+    data.each do |item|
+      case item['type']
+      when 'MusicAlbum'
+        display_list(item)
+      # when data.type == 'Movie'
+      when 'Genre'
+        display_genre(item)
+        # implement method to display formatted movie list
+      end
     end
   end
 
@@ -97,16 +113,17 @@ end
 
 Main.new([
            { order: 1, message: 'List all books' },
-           { order: 2, message: 'List all movies' },
-           { order: 3, message: 'List of games' },
-           { order: 4, message: "List all genres (e.g 'Comedy', 'Thriller')'" },
-           { order: 5, message: "List all labels (e.g. 'Gift', 'New')" },
-           { order: 6, message: "List all authors (e.g. 'Stephen King')" },
-           { order: 7, message: "List all sources (e.g. 'From a friend', 'Online shop')" },
-           { order: 8, message: 'Add a book' },
-           { order: 9, message: 'Add a music album' },
-           { order: 10, message: 'Add a movie' },
-           { order: 11, message: 'Add a game' },
-           { order: 12, message: 'Add a label' },
+           { order: 2, message: 'List all music albums' },
+           { order: 3, message: 'List all movies' },
+           { order: 4, message: 'List of games' },
+           { order: 5, message: "List all genres (e.g 'Comedy', 'Thriller')'" },
+           { order: 6, message: "List all labels (e.g. 'Gift', 'New')" },
+           { order: 7, message: "List all authors (e.g. 'Stephen King')" },
+           { order: 8, message: "List all sources (e.g. 'From a friend', 'Online shop')" },
+           { order: 9, message: 'Add a book' },
+           { order: 10, message: 'Add a music album' },
+           { order: 11, message: 'Add a movie' },
+           { order: 12, message: 'Add a game' },
+           { order: 13, message: 'Add a label' },
            { order: 'Q', message: 'Exit the app' }
          ]).promot_user
