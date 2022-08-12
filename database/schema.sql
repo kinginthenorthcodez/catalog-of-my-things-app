@@ -10,6 +10,10 @@ DROP TABLE IF EXISTS author;
 
 DROP TABLE IF EXISTS game;
 
+DROP TABLE IF EXISTS music_album;
+
+DROP TABLE IF EXISTS genre;
+
 
 CREATE TABLE item(
   id INT NOT NULL Generated Always As Identity,
@@ -50,6 +54,13 @@ CREATE TABLE source(
   id INT NOT NULL Generated Always As Identity,
   name varchar(100) NULL,
 
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE genre(
+  id INT NOT NULL Generated Always As Identity,
+  name varchar(100) NULL,
+  
   PRIMARY KEY (id)
 );
 
@@ -100,3 +111,21 @@ CREATE TABLE game(
   CONSTRAINT fk_author FOREIGN KEY(author_id) REFERENCES author(id) ON DELETE SET NULL ON UPDATE CASCADE,
   PRIMARY KEY(id)
 );
+
+CREATE TABLE music_album(
+  id INT NOT NULL Generated Always As Identity,
+  on_spotify Boolean,
+  genre_id INT,
+  source_id INT,
+  label_id INT,
+  author_id INT,
+  publish_date Date,
+  archived Boolean,
+  
+  CONSTRAINT fk_genre FOREIGN KEY(genre_id) REFERENCES genre(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_source FOREIGN KEY(source_id) REFERENCES source(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_label FOREIGN KEY(label_id) REFERENCES label(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT fk_author FOREIGN KEY(author_id) REFERENCES author(id) ON DELETE SET NULL ON UPDATE CASCADE,
+  PRIMARY KEY(id)
+);
+
