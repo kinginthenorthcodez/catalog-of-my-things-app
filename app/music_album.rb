@@ -1,4 +1,5 @@
-require_relative '../app/file/read_write.rb'
+require_relative '../file/read_write'
+require_relative './music'
 
 def create_music_album
    puts "Is album on spotify? Y or N"
@@ -9,10 +10,10 @@ def create_music_album
    archived = parse_bool
 
    music = MusicAlbum.new(on_spotify, published_date, archived)
-   read_write = ReadWrite.new('MusicAlbum')
+   read_write = ReadWrite.new(MusicAlbum)
           .add_file({
             on_spotify: on_spotify, 
-            published_date: publish_date,
+            published_date: published_date,
             archived: archived
           })     
 end
